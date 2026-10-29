@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VectraCycle - ASHA Field Logger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="max-w-md mx-auto min-h-screen bg-white shadow-lg flex flex-col">
+        <!-- Header -->
+        <header class="bg-emerald-600 text-white p-4 text-center">
+            <h1 class="text-xl font-bold">VectraCycle ASHA Portal</h1>
+            <p class="text-xs text-emerald-100">Smart Vector Surveillance & QR Logger</p>
+        </header>
+
+        <!-- Form Container -->
+        <form id="trapForm" class="p-4 flex-1 flex flex-col gap-4">
+            
+            <!-- Trap ID Section -->
+            <div>
+                <label class="block text-sm font-semibold mb-1">Trap ID / Scanned QR Code</label>
+                <div class="flex gap-2">
+                    <input type="text" id="trapId" name="trapId" value="TRAP-NSK-101" required
+                        class="flex-1 border rounded-lg px-3 py-2 bg-slate-100 text-slate-700 font-mono text-sm" readonly>
+                    <button type="button" onclick="alert('Camera QR Scanner Activated!')" 
+                        class="bg-emerald-700 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-emerald-800">
+                        📷 Scan QR
+                    </button>
+                </div>
+            </div>
+
+            <!-- Auto GPS Capture -->
+            <div class="bg-slate-50 border p-3 rounded-lg text-xs text-slate-600">
+                <span class="font-semibold text-slate-700">📍 Auto-Captured Location:</span> 
+                <span id="gpsCoords">Lat: 20.0059, Long: 73.7898 (Ward 4, Nashik)</span>
+            </div>
+
+            <!-- Density Level -->
+            <div>
+                <label class="block text-sm font-semibold mb-1">Mosquito & Larvae Density</label>
+                <select name="density" required class="w-full border rounded-lg px-3 py-2 text-sm bg-white">
+                    <option value="Low">Low (1–10 mosquitoes / minimal larvae)</option>
+                    <option value="Moderate">Moderate (11–30 mosquitoes / visible clusters)</option>
+                    <option value="High">High (>30 mosquitoes / Outbreak Risk 🚨)</option>
+                </select>
+            </div>
+
+            <!-- Maintenance Status -->
+            <div>
+                <label class="block text-sm font-semibold mb-1">Trap Maintenance Status</label>
+                <select name="status" required class="w-full border rounded-lg px-3 py-2 text-sm bg-white">
+                    <option value="Intact">Intact & Active (CO2 water normal)</option>
+                    <option value="RefillNeeded">Needs CO2 Water Refill</option>
+                    <option value="Damaged">Damaged / Needs Replacement</option>
+                </select>
+            </div>
+
+            <!-- Proof Upload -->
+            <div>
+                <label class="block text-sm font-semibold mb-1">Capture Field Proof Photo</label>
+                <input type="file" accept="image/*" capture="environment" required
+                    class="w-full border rounded-lg p-2 text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="mt-auto bg-emerald-600 text-white font-semibold py-3 rounded-lg shadow hover:bg-emerald-700 transition">
+                Submit Observation
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('trapForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Success! Observation logged and synced with Govt. Health Dashboard.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
